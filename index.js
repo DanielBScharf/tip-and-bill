@@ -3,46 +3,28 @@ const bill = document.getElementById("total");
 const people = document.getElementById("people");
 const tip = document.getElementById("tip%");
 const custom = document.querySelector(".textSelectdiv");
-const showTip = document.querySelector('.tip-total');
+const totalTab = document.querySelector('.totalTab');
 
-function calculateTip(params) {
-  const totalTip = params * Number(bill.value);
-  return totalTip;
-}
+
+
 
 function tipNum(params) {
   let percentage = 0;
-  // if (tip.value === '5%') {
-  //   percentage = .05;
-  // } else if (tip.value === '10%'){
-  //   percentage = .1;
-  // } else if (tip.value === '15%') {
-  //   percentage = .15;
-  // } else if (tip.value === '20%') {
-  //   percentage = .2;
-  // } else if (tip.value === '25%') {
-  //   percentage = .25;
-  // } else {
-  //   percentage = tip.value / 10
-  // }
-  switch (params) {
-    case params === "5%":
-      percentage = 0.05;
-    case params === "10%":
-      percentage = 0.1;
-    case params === "15%":
-      percentage = 0.15;
-    case params === "20%":
-      percentage = 0.2;
-    case params === "25%":
-      percentage = 0.25;
-    default:
-      optionalTip
-      const customTip = document.getElementById("customTip");
-      percentage = customTip * 10;
+  if (params === '5%') {
+    percentage = .05;
+  } else if (params === '10%'){
+    percentage = .1;
+  } else if (params === '15%') {
+    percentage = .15;
+  } else if (params === '20%') {
+    percentage = .2;
+  } else if (params === '25%') {
+    percentage = .25;
+  } else {
+    percentage = params / 10
   };
-  return percentage
-}
+  return percentage;
+};
 
 function optionalTip() {
   let customTip = document.createElement('input');
@@ -50,26 +32,26 @@ function optionalTip() {
   custom.appendChild(customTip);
 };
 
-// form.addEventListener('submit', e => {
-//   e.preventDefault();
-//   const done = document.createElement('h1');
-//   done.innerText = 'DONE'
-//   showTip.appendChild(done);
-//   const totalBill = bill.value;
-//     console.log(totalBill);
-//   const totalTip = calculateTip(tipNum);
-//     console.log(totalTip);
-// });
+const details = {
+  totalBill: 0,
+  totalTip: 0,
+  eachPerson: 0
+}
+
+function calculateTotal(tip, bill, people) {
+  details.totalTip = tip * bill;
+  details.totalBill = (parseFloat(details.totalTip) + parseFloat(bill));
+  details.eachPerson = details.totalBill / people;
+};
+
+
+function showAll(){
+  totalTab.innerHTML = `<h3>The bill is $${bill.value}</h3><h4>With a ${tip.value} tip, your total tip is $${details.totalTip}</h4> <h4>That makes your total bill <strong>$${details.totalBill}</strong></h4><h4>With a party of ${people.value} each person will pay <strong>$${details.eachPerson}</strong></h4>`
+};
 
 form.addEventListener('submit', function (e) {
   e.preventDefault();
-  console.log(`the bill is ${typeof Number(bill.value)}`);
-  console.log(`the tip is ${tipNum(tip.value)}`);
-  // const done = document.createElement('h1');
-  // done.innerText = 'DONE'
-  // showTip.appendChild(done);
-  // const totalBill = bill.value;
-  //   console.log(totalBill);
-  // const totalTip = calculateTip(tipNum);
-  //   console.log(totalTip);
+  calculateTotal(tipNum(tip.value), bill.value, people.value);
+  showAll();
+  form.reset();
 });
