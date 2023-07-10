@@ -72,13 +72,13 @@ h1{
   /* For a screen < 720px, this CSS will be read */
   body {
     width: 600px;
-    margin-left: 10px;
+    margin-left: 20px;
   }
 }
 @media (max-width: 540px) {
   /* For a screen < 540px, this CSS will be read */
   body {
     width: 300px;
-    margin-left: 20px;
+    margin-left: 30px;
   }
 }
