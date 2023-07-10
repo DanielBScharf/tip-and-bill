@@ -17,6 +17,7 @@
     <h1>Tip and Bill calculator</h1>
     <div class="input">
       <form id="bill-info" action="">
+
         <div class="mb-3">
           <label for="total">What is the total bill amount?</label>
           <input type="float" id="total" name="total" min="1" max="100000" required/>
@@ -39,9 +40,22 @@
             </select>
           </div>
         </div>
+        <div class="mb-3">
+          <label for="currency">What currency are you using?</label>
+
+            <select name="currency" id="currency" type="textSelectdiv" required>
+              <option value="$">$</option>
+              <option value="¥">¥</option>
+              <option value="₩">₩</option>
+              <option value="€">€</option>
+              <option value="£">£</option>
+            </select>
+          </div>
         <div class="d-grid gap-2">
           <input class="btn btn-primary .btn-block" type="submit" />
         </div>
+        </div>
+      </div>
       </form>
     </div>
     <div class="card hidden">

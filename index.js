@@ -5,7 +5,7 @@ const tip = document.getElementById("tip%");
 const custom = document.querySelector(".textSelectdiv");
 const totalTab = document.querySelector('.totalTab');
 const card = document.querySelector('.card')
-
+const currency = document.getElementById('currency');
 
 
 function tipNum(params) {
@@ -51,11 +51,12 @@ function calculateTotal(tip, bill, people) {
 
 
 function showAll(){
-  totalTab.innerHTML = `<h4 class="card-title">The bill is $${bill.value}</h4><p class="card-text">With a ${tip.value} tip, your total tip is $${details.totalTip.toFixed(2)}</p> <p class="card-text">That makes your total bill <strong>$${details.totalBill.toFixed(2)}</strong></p><p class="card-text">With a party of ${people.value}, each person will pay <strong>$${details.eachPerson.toFixed(2)}</strong></p>`
+  totalTab.innerHTML = `<h4 class="card-title">The bill is ${currency.value}${bill.value}</h4><p class="card-text">With a ${tip.value} tip, your total tip is ${currency.value}${details.totalTip.toFixed(2)}</p> <p class="card-text">That makes your total bill <strong>${currency.value}${details.totalBill.toFixed(2)}</strong></p><p class="card-text">With a party of ${people.value}, each person will pay <strong>${currency.value}${details.eachPerson.toFixed(2)}</strong></p>`
 };
 
 form.addEventListener('submit', function (e) {
   e.preventDefault();
+  console.log(currency)
   card.classList.remove('hidden');
   console.log(parseFloat(tipNum(tip.value)), parseFloat(bill.value))
   calculateTotal(tipNum(tip.value), bill.value, people.value);
