@@ -4,7 +4,7 @@ const people = document.getElementById("people");
 const tip = document.getElementById("tip%");
 const custom = document.querySelector(".textSelectdiv");
 const totalTab = document.querySelector('.totalTab');
-
+const card = document.querySelector('.card')
 
 
 
@@ -39,18 +39,25 @@ const details = {
 }
 
 function calculateTotal(tip, bill, people) {
-  details.totalTip = tip * bill;
-  details.totalBill = (parseFloat(details.totalTip) + parseFloat(bill));
-  details.eachPerson = details.totalBill / people;
+  if ( isNaN(parseFloat(tip))) {
+    details.totalTip = 0;
+    details.totalBill = parseFloat(bill);
+  } else {
+    details.totalTip = tip * parseFloat(bill);
+    details.totalBill = (parseFloat(details.totalTip) + parseFloat(bill));
+  }
+  details.eachPerson = (details.totalBill / people);
 };
 
 
 function showAll(){
-  totalTab.innerHTML = `<h3>The bill is $${bill.value}</h3><h4>With a ${tip.value} tip, your total tip is $${details.totalTip}</h4> <h4>That makes your total bill <strong>$${details.totalBill}</strong></h4><h4>With a party of ${people.value} each person will pay <strong>$${details.eachPerson}</strong></h4>`
+  totalTab.innerHTML = `<h4 class="card-title">The bill is $${bill.value}</h4><p class="card-text">With a ${tip.value} tip, your total tip is $${details.totalTip.toFixed(2)}</p> <p class="card-text">That makes your total bill <strong>$${details.totalBill.toFixed(2)}</strong></p><p class="card-text">With a party of ${people.value}, each person will pay <strong>$${details.eachPerson.toFixed(2)}</strong></p>`
 };
 
 form.addEventListener('submit', function (e) {
   e.preventDefault();
+  card.classList.remove('hidden');
+  console.log(parseFloat(tipNum(tip.value)), parseFloat(bill.value))
   calculateTotal(tipNum(tip.value), bill.value, people.value);
   showAll();
   form.reset();
